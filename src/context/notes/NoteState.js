@@ -28,13 +28,13 @@ const NoteState = props => {
     const note={
 			_id: "65967e3f66c4b1a9599df7cb3",
 			user: "6595970662670a4d00a3967b",
-			title: "this is newest  title1",
-			description: "this is new description1",
-			tag: "personal1",
+			title: title,
+			description: description,
+			tag: tag,
 			date: "2024-01-04T09:45:35.821Z",
 			__v: 0,
 		}
-    setNotes(notes.push(note))
+    setNotes(notes.concat(note))
   };
 
 	const deleteNote = () => {

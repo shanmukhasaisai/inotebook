@@ -4,6 +4,7 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Navbar from "./components/Navbar";
 import About from "./components/About";
 import NoteState from "./context/notes/NoteState";
+import Alert from "./components/Alert";
 
 function App() {
 	return (
@@ -11,6 +12,7 @@ function App() {
 			<NoteState>
 				<BrowserRouter>
 					<Navbar />
+					<Alert message="alert message"/>
 					<div className="container">
 						<Routes>
 							<Route path="/" element={<Home />}></Route>
