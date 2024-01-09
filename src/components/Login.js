@@ -13,6 +13,7 @@ const Login = () => {
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const response = await fetch("http://localhost:5000/api/auth/login", {
+
 			method: "POST", // *GET, POST, PUT, DELETE, etc.
 
 			headers: {
@@ -51,6 +52,7 @@ const Login = () => {
 						value={credentials.email}
 						onChange={onChange}
 					/>
+
 				</div>
 				<div className="mb-3">
 					<label htmlFor="password" className="form-label">

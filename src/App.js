@@ -8,20 +8,32 @@ import Alert from "./components/Alert";
 import Login from "./components/Login";
 import Signup from "./components/Signup";
 
+import { useState } from "react";
+
 function App() {
+	const [alert, setAlert] = useState(null);
+	const showAlert = (message, type) => {
+		setAlert({
+			message: message,
+			type: type,
+		});
+		setTimeout(() => {
+			setAlert(null);
+		}, 2000);
+	};
 	return (
 		<>
 			<NoteState>
 				<BrowserRouter>
 					<Navbar />
-					<Alert message="alert message"/>
+					<Alert alert={alert} />
 					<div className="container">
 						<Routes>
 							<Route path="/" element={<Home />}></Route>
 							<Route path="/about" element={<About />} ></Route>
 							<Route path="/login" element={<Login/>} ></Route>
 							<Route path="/signup" element={<Signup/>} ></Route>
-							
+						
 						</Routes>
 					</div>
 				</BrowserRouter>
