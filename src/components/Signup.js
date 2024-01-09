@@ -12,6 +12,7 @@ const Signup = (props) => {
 	const onChange = e => {
 		setCredentials({ ...credentials, [e.target.name]: e.target.value });
 	};
+
 	const handleSubmit = async e => {
 		e.preventDefault();
 		const { name, email, password } = credentials;
@@ -37,6 +38,7 @@ const Signup = (props) => {
 	};
 	return (
 		<div className="container">
+
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="name" className="form-label">
@@ -52,6 +54,7 @@ const Signup = (props) => {
 						onChange={onChange}
 						required
 						minLength={3}
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -67,6 +70,7 @@ const Signup = (props) => {
 						value={credentials.email}
 						onChange={onChange}
 						required
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -83,6 +87,7 @@ const Signup = (props) => {
 						required
 						minLength={5}
             autoComplete="on"
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -98,6 +103,7 @@ const Signup = (props) => {
 						onChange={onChange}
 						required
 						minLength={5}
+
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">

@@ -46,6 +46,7 @@ const Navbar = () => {
 							<a className="btn btn-primary mx-2" href="/login">Login</a>
 							<a className="btn btn-primary mx-2" href="/signup">Sign Up</a>
 						</form>
+
 					</div>
 				</div>
 			</nav>
