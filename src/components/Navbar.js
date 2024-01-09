@@ -42,8 +42,10 @@ const Navbar = () => {
 								</a>
 							</li>
 						</ul>
-						<a className="btn btn-primary mx-2" href="/login" role="button">Login</a>
-						<a className="btn btn-primary mx-2" href="/signup" role="button" >Register</a>
+						<form className="d-flex" role="search">
+							<a className="btn btn-primary mx-2" href="/login">Login</a>
+							<a className="btn btn-primary mx-2" href="/signup">Sign Up</a>
+						</form>
 
 					</div>
 				</div>

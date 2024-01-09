@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Signup = (props) => {
-	let navigate = useNavigate();
+const Signup = () => {
 
 	const [credentials, setCredentials] = useState({
 		name: "",
@@ -10,6 +9,10 @@ const Signup = (props) => {
 		password: "",
 		cpassword: "",
 	});
+	let navigate = useNavigate();
+	const onChange = e => {
+		setCredentials({ ...credentials, [e.target.name]: e.target.value });
+	};
 
 	const handleSubmit = async e => {
 		e.preventDefault();
@@ -20,28 +23,21 @@ const Signup = (props) => {
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({
-				name,
-				email,
-				password,
-			}),
+
+			body: JSON.stringify({ name, email, password }),
 		});
+
 		const json = await response.json();
 		console.log(json);
-    if(json.success){
-      localStorage.getItem({ token: json.authtoken });
-      navigate("/");
-      props.showAlert("Account Created Successfully","success")
-    }
-    else{
-      props.showAlert("Invalid credentials","danger")
-    }
-	};
-	const onChange = e => {
-		setCredentials({ ...credentials, [e.target.name]: e.target.value });
+		if (json.success) {
+			localStorage.setItem("token", json.authtoken);
+			navigate("/");
+		} else {
+		}
 	};
 	return (
-		<div>
+		<div className="container">
+
 			<form onSubmit={handleSubmit}>
 				<div className="mb-3">
 					<label htmlFor="name" className="form-label">
@@ -51,11 +47,13 @@ const Signup = (props) => {
 						type="text"
 						className="form-control"
 						id="name"
-						aria-describedby="emailHelp"
-						onChange={onChange}
 						name="name"
-            required
-            minLength={3}
+						aria-describedby="emailHelp"
+						value={credentials.name}
+						onChange={onChange}
+						required
+						minLength={3}
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -66,9 +64,12 @@ const Signup = (props) => {
 						type="email"
 						className="form-control"
 						id="email"
-						aria-describedby="emailHelp"
-						onChange={onChange}
 						name="email"
+						aria-describedby="emailHelp"
+						value={credentials.email}
+						onChange={onChange}
+						required
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -79,9 +80,13 @@ const Signup = (props) => {
 						type="password"
 						className="form-control"
 						id="password"
-						onChange={onChange}
 						name="password"
-            minLength={5}
+						value={credentials.password}
+						onChange={onChange}
+						required
+						minLength={5}
+            autoComplete="on"
+
 					/>
 				</div>
 				<div className="mb-3">
@@ -92,9 +97,12 @@ const Signup = (props) => {
 						type="password"
 						className="form-control"
 						id="cpassword"
-						onChange={onChange}
 						name="cpassword"
-            minLength={5}
+						value={credentials.cpassword}
+						onChange={onChange}
+						required
+						minLength={5}
+
 					/>
 				</div>
 				<button type="submit" className="btn btn-primary">

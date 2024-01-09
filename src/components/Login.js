@@ -1,40 +1,41 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-const Login = (props) => {
-  let navigate = useNavigate();
+const Login = () => {
+	const [credentials, setCredentials] = useState({
+		email: "",
+		password: "",
+	});
+  let navigate=useNavigate();
+	const onChange = e => {
+		setCredentials({ ...credentials, [e.target.name]: e.target.value });
+	};
+	const handleSubmit = async e => {
+		e.preventDefault();
+		const response = await fetch("http://localhost:5000/api/auth/login", {
 
-  const [credentials, setCredentials] = useState({
-    email:"",
-    password:""
-  })
-
-  const handleSubmit=async (e)=>{
-    e.preventDefault();
-    const response = await fetch("http://localhost:5000/api/auth/login", {
 			method: "POST", // *GET, POST, PUT, DELETE, etc.
 
 			headers: {
 				"Content-Type": "application/json",
 			},
-			body: JSON.stringify({email: credentials.email ,password: credentials.password }),
 
+			body: JSON.stringify({
+				email: credentials.email,
+				password: credentials.password,
+			}),
 		});
-    const json = await response.json();
-    console.log(json);
+
+		const json = await response.json();
+		console.log({ json });
     if(json.success){
-      localStorage.getItem({'token':json.authtoken});
-      navigate("/");
-			props.showAlert("Logged in successfully ","success") 
+      localStorage.setItem('token',json.authtoken);
+      navigate('/');
     }
     else{
-			props.showAlert("Invalid details ","danger")
 
     }
-  }
-  const onChange=(e)=>{
-    setCredentials({...credentials,[e.target.name]:e.target.value})
-  }
+	};
 	return (
 		<div>
 			<form onSubmit={handleSubmit}>
@@ -46,14 +47,12 @@ const Login = (props) => {
 						type="email"
 						className="form-control"
 						id="email"
-            name="email"
+						name="email"
 						aria-describedby="emailHelp"
-            value={credentials.email}
-            onChange={onChange}
+						value={credentials.email}
+						onChange={onChange}
 					/>
-					<div id="emailHelp" className="form-text">
-						We'll never share your email with anyone else.
-					</div>
+
 				</div>
 				<div className="mb-3">
 					<label htmlFor="password" className="form-label">
@@ -63,18 +62,13 @@ const Login = (props) => {
 						type="password"
 						className="form-control"
 						id="password"
-            name="password"
-            value={credentials.password}
-            onChange={onChange}
+						name="password"
+						value={credentials.password}
+						onChange={onChange}
+            autoComplete="on"
 					/>
 				</div>
-				<div className="mb-3 form-check">
-					<input type="checkbox" className="form-check-input" id="exampleCheck1" />
-					<label className="form-check-label" htmlFor="exampleCheck1">
-						Check me out
-					</label>
-				</div>
-				<button type="submit" className="btn btn-primary" >
+				<button type="submit" className="btn btn-primary">
 					Submit
 				</button>
 			</form>
