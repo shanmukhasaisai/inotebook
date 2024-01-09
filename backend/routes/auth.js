@@ -19,7 +19,6 @@ router.post(
 		}),
 	],
 	async (req, res) => {
-		let success=false;
 		//if there are errors return bad request and the errors
 		let success = false;
 		const errors = validationResult(req);
@@ -69,7 +68,6 @@ router.post(
 		body("password", "password cannot be blank").exists(),
 	],
 	async (req, res) => {
-		let success=false;
 		//if there are errors return bad request and the errors
 		let success = false;
 		const errors = validationResult(req);
